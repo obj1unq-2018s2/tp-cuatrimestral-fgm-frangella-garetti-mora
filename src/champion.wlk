@@ -1,12 +1,21 @@
 class Champion {
 
-	var property vida
-	var property ataque
-	var property danio
+	const vida
+	const ataque
+	var property danio = 0
 	var property estaVivo = true
-	var bloqueos
-	var items
+	var bloqueos = 0
+	var property items = []
 
+	constructor(_vida, _ataque) {
+		vida = _vida
+		ataque = _ataque 
+	}
+
+	method vida() = vida + items.sum{item=>item.puntosDeVida(self)}
+	
+	method ataque() = ataque + items.sum{item=>item.puntosDeAtaque(self)}
+	
 	method bloqueos() = bloqueos
 
 	method bloqueos(cantidad) {
@@ -14,15 +23,13 @@ class Champion {
 	}
 
 	method atacar(alguien) {
-		alguien.recibirAtaque(ataque)
+		self.recibirAtaque(alguien)
+		alguien.recibirAtaque(self.ataque())
 	}
 
 	method recibirAtaque(alguien) {
 		if (bloqueos < 1) {
 			self.recibirDanio(alguien.ataque())
-			if (estaVivo) {
-				estaVivo = false
-			}
 		} else {
 			bloqueos -= 1
 		}
@@ -39,11 +46,11 @@ class Champion {
 	}
 
 	method recibirDanio(cantidad) {
+		if (danio >= self.vida()) {
+			estaVivo = false
+		}
 		danio += cantidad
 	}
 
-	method recibirVida(cantidad) {
-		vida += cantidad
-	}
-
 }
+

@@ -1,0 +1,29 @@
+import champion.*
+import minion.*
+import items.*
+
+describe "test campeones e items" {
+
+	var masterYi = new Champion(vida = 50, ataque = 15)
+	var doran = new AnilloDeDoran()
+	var tomo = new TomoAmplificador()
+	var oleada = new OleadaDeMinions(cantMinions = 10, plus = 5)
+	var oleada2 = new OleadaDeMinions(cantMinions = 10, plus = 5)
+	var oleada3 = new OleadaDeMinions(cantMinions = 10, plus = 5)
+
+	fixture {
+		masterYi.equiparItem(doran)
+		masterYi.equiparItem(tomo)
+	}
+	
+	test "atacar oleada y desequipar tomo"{
+		
+		masterYi.atacar(oleada)
+		masterYi.atacar(oleada2)
+		masterYi.atacar(oleada3)
+		masterYi.desequiparItem(tomo)
+		masterYi.desequiparItem(doran)
+		assert.equals(masterYi.estaVivo(),false)
+	}
+
+}
