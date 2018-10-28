@@ -3,7 +3,6 @@ class Champion {
 	const vida
 	const ataque
 	var property danio = 0
-	var property estaVivo = true
 	var bloqueos = 0
 	var property items = []
 
@@ -12,6 +11,8 @@ class Champion {
 		ataque = _ataque 
 	}
 
+	method estaVivo() = danio < vida
+	
 	method vida() = vida + items.sum{item=>item.puntosDeVida(self)}
 	
 	method ataque() = ataque + items.sum{item=>item.puntosDeAtaque(self)}
@@ -46,9 +47,6 @@ class Champion {
 	}
 
 	method recibirDanio(cantidad) {
-		if (danio >= self.vida()) {
-			estaVivo = false
-		}
 		danio += cantidad
 	}
 

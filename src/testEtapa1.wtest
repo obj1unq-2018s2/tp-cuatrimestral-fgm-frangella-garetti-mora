@@ -7,9 +7,9 @@ describe "test campeones e items" {
 	var masterYi = new Champion(vida = 50, ataque = 15)
 	var doran = new AnilloDeDoran()
 	var tomo = new TomoAmplificador()
-	var oleada = new OleadaDeMinions(cantMinions = 10, plus = 5)
-	var oleada2 = new OleadaDeMinions(cantMinions = 10, plus = 5)
-	var oleada3 = new OleadaDeMinions(cantMinions = 10, plus = 5)
+	var oleada = new OleadaDeMinions(cantMinions = 10, plus = 25)
+	var oleada2 = new OleadaDeMinions(cantMinions = 10, plus = 25)
+	var oleada3 = new OleadaDeMinions(cantMinions = 10, plus = 25)
 
 	fixture {
 		masterYi.equiparItem(doran)
