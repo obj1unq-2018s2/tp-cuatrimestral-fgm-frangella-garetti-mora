@@ -4,9 +4,10 @@ import items.*
 
 describe "test campeones e items" {
 
-	var masterYi = new Champion(vida = 50, ataque = 15)
+	var masterYi = new Champion(vidaBase = 50, ataqueBase = 15)
 	var doran = new AnilloDeDoran()
 	var tomo = new TomoAmplificador()
+	var sombreroDeRabadon = new SombreroDeRabadon()
 	var oleada = new OleadaDeMinions(cantMinions = 10, plus = 25)
 	var oleada2 = new OleadaDeMinions(cantMinions = 10, plus = 25)
 	var oleada3 = new OleadaDeMinions(cantMinions = 10, plus = 25)
@@ -24,6 +25,24 @@ describe "test campeones e items" {
 		masterYi.desequiparItem(tomo)
 		masterYi.desequiparItem(doran)
 		assert.equals(masterYi.estaVivo(),false)
+	}
+	
+	test "Sombrero de rabadon aumenta sobre el ataque base" {
+		masterYi.equiparItem(sombreroDeRabadon)
+		assert.equals(masterYi.ataque(),60.5)
+		
+	}
+	
+	test "efectos al desequipar items"{
+		masterYi.desequiparItem(tomo)
+		assert.equals(masterYi.bloqueos(),3)
+		masterYi.desequiparItem(doran)
+		assert.equals(masterYi.danio(),25)
+	}
+	
+	test "el danio no puede ser negativo"{
+		masterYi.quitarDanio(3000)
+		assert.equals(masterYi.danio(),0)
 	}
 
 }

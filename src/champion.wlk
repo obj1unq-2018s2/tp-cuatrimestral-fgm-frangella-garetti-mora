@@ -1,7 +1,7 @@
 class Champion {
 
-	const vidaBase // Correccion etapa 1
-	const ataqueBase // Correccion etapa 1
+	const property vidaBase // Correccion etapa 1
+	const property ataqueBase // Correccion etapa 1
 	var property danio = 0
 	var bloqueos = 0
 	var property items = []
@@ -19,7 +19,7 @@ class Champion {
 
 	method bloqueos() = bloqueos
 
-	method bloqueos(cantidad) {
+	method sumarBloqueos(cantidad) {
 		bloqueos += cantidad
 	}
 
@@ -51,7 +51,11 @@ class Champion {
 	}
 
 	method quitarDanio(cantidad) { // Correccion etapa 1
-		danio -= cantidad
+		if (cantidad > danio) {
+			danio = 0
+		} else {
+			danio -= cantidad
+		}
 	}
 
 }
