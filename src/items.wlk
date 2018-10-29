@@ -1,4 +1,8 @@
 class Items {
+	
+	method costo()
+
+	method habilidadActivable(campeon)
 
 	method puntosDeVida(champion)
 
@@ -11,6 +15,10 @@ class Items {
 }
 
 class AnilloDeDoran inherits Items {
+	
+	override method costo() = 300
+
+	override method habilidadActivable(campeon){}
 
 	override method puntosDeVida(champion) = 60
 
@@ -28,8 +36,15 @@ class AnilloDeDoran inherits Items {
 
 class TomoAmplificador inherits Items {
 	
+	override method costo() = 500
 	
-	
+	override method habilidadActivable(campeon) {
+		var usos = 1
+		if (usos < 0 and campeon.dinero() < 500){
+			campeon.dinero(500)
+			usos -= 1
+		}
+	}
 	override method puntosDeVida(champion) = champion.danio() * 0.25 // Correccion etapa 1
 
 	override method puntosDeAtaque(champion) = champion.danio() * 0.05 // Correccion etapa 1
@@ -46,6 +61,10 @@ class TomoAmplificador inherits Items {
 }
 
 class SombreroDeRabadon inherits TomoAmplificador {
+	
+	override method costo() = super() + 100
+	
+	override method habilidadActivable(campeon){}
 
 	override method puntosDeVida(champion) = super(champion) + 5
 
@@ -57,6 +76,28 @@ class SombreroDeRabadon inherits TomoAmplificador {
 	}
 
 	override method efectoAlDesequipar(champion) {}
+}
+
+class PocionDeVida inherits Items {
+	
+	override method costo() = 50
+	
+	override method habilidadActivable(campeon){
+		var usos = 2
+		if(usos < 0){
+			campeon.quitarDanio(50)
+			usos -= 1
+		}
+	}
+
+	override method puntosDeVida(champion){}
+
+	override method puntosDeAtaque(champion){}
+
+	override method efectoAlEquipar(champion){}
+
+	override method efectoAlDesequipar(champion){}
 	
 }
+
 
