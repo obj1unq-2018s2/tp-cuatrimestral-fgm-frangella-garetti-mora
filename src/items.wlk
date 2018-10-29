@@ -21,7 +21,7 @@ class AnilloDeDoran inherits Items {
 	}
 
 	override method efectoAlDesequipar(champion) {
-		champion.recibirDanio(-10)
+		champion.quitarDanio(10)
 	}
 
 }
@@ -30,9 +30,9 @@ class TomoAmplificador inherits Items {
 	
 	
 	
-	override method puntosDeVida(champion) = champion.danio() * 0.75
+	override method puntosDeVida(champion) = champion.danio() * 0.25
 
-	override method puntosDeAtaque(champion) = champion.danio() * 0.95
+	override method puntosDeAtaque(champion) = champion.danio() * 0.5
 
 	override method efectoAlEquipar(champion) {
 		champion.bloqueos(2)
@@ -49,7 +49,7 @@ class SombreroDeRabadon inherits TomoAmplificador {
 
 	override method puntosDeVida(champion) = super(champion) + 5
 
-	override method puntosDeAtaque(champion) = champion.ataque() * 2
+	override method puntosDeAtaque(champion) = champion.ataqueBase() * 2
 
 	override method efectoAlEquipar(champion) {
 		super(champion)
