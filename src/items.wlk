@@ -97,7 +97,7 @@ class PocionDeVida inherits Items {
 	override method efectoAlEquipar(champion){}
 
 	override method efectoAlDesequipar(champion){}
-//dasd	
+
 }
 
 
