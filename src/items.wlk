@@ -32,7 +32,7 @@ class TomoAmplificador inherits Items {
 	
 	override method puntosDeVida(champion) = champion.danio() * 0.25
 
-	override method puntosDeAtaque(champion) = champion.danio() * 0.5
+	override method puntosDeAtaque(champion) = champion.danio() * 0.05
 
 	override method efectoAlEquipar(champion) {
 		champion.bloqueos(2)
