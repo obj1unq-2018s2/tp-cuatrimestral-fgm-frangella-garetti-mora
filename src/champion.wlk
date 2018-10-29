@@ -24,13 +24,16 @@ class Champion {
 	}
 
 	method atacar(alguien) {
-		self.recibirAtaque(alguien)
-		alguien.recibirAtaque(self.ataque())
+		var ataqueEnemigo = alguien.ataque() // variables locales para que el danio no se modifique por quien pega primero
+		var ataquePropio = self.ataque()
+		self.recibirAtaque(ataqueEnemigo)
+		alguien.recibirAtaque(ataquePropio)
 	}
 
-	method recibirAtaque(alguien) {
+
+	method recibirAtaque(cantidad) {
 		if (bloqueos < 1) {
-			self.recibirDanio(alguien.ataque())
+			self.recibirDanio(cantidad)
 		} else {
 			bloqueos -= 1
 		}
