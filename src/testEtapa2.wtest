@@ -1,0 +1,35 @@
+import champion.*
+import minion.*
+import items.*
+
+describe "test campeones e items etapa 2" {
+
+	var masterYi = new Champion(vidaBase = 50, ataqueBase = 15, dinero = 300)
+	var doran = new AnilloDeDoran()
+	var tomo = new TomoAmplificador()
+	var tomo2 = new TomoAmplificador()
+	var sombreroDeRabadon = new SombreroDeRabadon()
+	var oleada = new OleadaDeMinions(cantMinions = 10, plus = 25)
+	var oleada2 = new OleadaDeMinions(cantMinions = 10, plus = 25)
+	var oleada3 = new OleadaDeMinions(cantMinions = 10, plus = 25)
+
+	fixture {
+		masterYi.equiparItem(doran)
+		masterYi.equiparItem(tomo)
+	}
+
+	test "test 1" {
+		masterYi.atacar(oleada)
+		masterYi.atacar(oleada)
+		masterYi.atacar(oleada)
+		assert.that(!oleada.estaViva())
+		masterYi.desequiparItem(doran)
+		masterYi.desequiparItem(tomo)
+		masterYi.equiparItem(tomo2)
+		masterYi.desequiparItem(tomo2)
+		assert.that(!masterYi.estaVivo())
+		
+	}
+
+}
+
