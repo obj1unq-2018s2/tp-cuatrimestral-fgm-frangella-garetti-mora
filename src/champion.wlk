@@ -5,6 +5,7 @@ class Champion {
 	var property danio = 0
 	var bloqueos = 0
 	var property items = []
+	var property dinero
 
 	constructor(_vida, _ataque) {
 		vidaBase = _vida
@@ -28,6 +29,7 @@ class Champion {
 		var ataquePropio = self.ataque()
 		self.recibirAtaque(ataqueEnemigo)
 		alguien.recibirAtaque(ataquePropio)
+		self.ganarDinero(alguien.dineroQueEntrega())
 	}
 
 
@@ -61,5 +63,24 @@ class Champion {
 		}
 	}
 
+	method comprar(item){
+		if (dinero>=item.costo()){
+			self.equiparItem(item)
+			self.quitarDinero(item.costo())
+		}
+	}
+	
+	method vender(item){
+		self.desequiparItem(item)
+		self.ganarDinero(item.costo()/2)
+	}
+	
+	method ganarDinero(cantidad){
+		dinero+=cantidad
+	}
+	
+	method quitarDinero(cantidad){
+		dinero-=cantidad
+	}
 }
 
