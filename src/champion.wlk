@@ -90,26 +90,28 @@ class Champion {
 
 class Support inherits Champion {
 	var vinculo // campeon
-	var property itemsSupport = []	
+		
 	override method atacar(alguien){
 		super(alguien)
 		vinculo.quitarDanio(10)
 	}
 	
-	override method vida() = super() + self.itemsSupport().sum{ item => item.puntosDeVida(self) }
+	method itemsVinculo() = vinculo.items()
 	
-	override method ataque() = super() + self.itemsSupport().sum{ item => item.puntosDeAtaque(self) }
+	override method vida() = super() + self.itemsVinculo().sum{ item => item.puntosDeVida(self) }
+	
+	override method ataque() = super() + self.itemsVinculo().sum{ item => item.puntosDeAtaque(self) }
 	
 	
-	override method equiparItem(item) {
-		itemsSupport.add(item)
-		item.efectoAlEquipar(self)
-	}
-
-	override method desequiparItem(item) {
-		itemsSupport.remove(item)
-		item.efectoAlDesequipar(self)
-	}
+//	override method equiparItem(item) {
+//		itemsSupport.add(item)
+//		item.efectoAlEquipar(self)
+//	}
+//
+//	override method desequiparItem(item) {
+//		itemsSupport.remove(item)
+//		item.efectoAlDesequipar(self)
+//	}
 
 }
 
