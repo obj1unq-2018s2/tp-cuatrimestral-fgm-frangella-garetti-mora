@@ -4,19 +4,23 @@ class Champion {
 	const property ataqueBase // Correccion etapa 1
 	var property danio = 0
 	var bloqueos = 0
-	var property items = []
+	var items = []
 	var property dinero
 
-	constructor(_vida, _ataque) {
+	constructor(_vida, _ataque,_dinero) {
 		vidaBase = _vida
 		ataqueBase = _ataque
+		dinero = _dinero
 	}
 
+
 	method estaVivo() = danio < vidaBase
+	
+	method items() = items
+	
+	method vida() = vidaBase + self.items().sum{ item => item.puntosDeVida(self) }
 
-	method vida() = vidaBase + items.sum{ item => item.puntosDeVida(self) }
-
-	method ataque() = ataqueBase + items.sum{ item => item.puntosDeAtaque(self) }
+	method ataque() = ataqueBase + self.items().sum{ item => item.puntosDeAtaque(self) }
 
 	method bloqueos() = bloqueos
 
@@ -34,9 +38,9 @@ class Champion {
 
 
 	method recibirAtaque(cantidad) {
-		if (bloqueos < 1) {
+		if (bloqueos < 1 && cantidad > 0) {
 			self.recibirDanio(cantidad)
-		} else {
+		} else if (bloqueos >= 1 && cantidad > 0) {
 			bloqueos -= 1
 		}
 	}
@@ -82,5 +86,30 @@ class Champion {
 	method quitarDinero(cantidad){
 		dinero-=cantidad
 	}
+}
+
+class Support inherits Champion {
+	var vinculo // campeon
+	var property itemsSupport = []	
+	override method atacar(alguien){
+		super(alguien)
+		vinculo.quitarDanio(10)
+	}
+	
+	override method vida() = super() + self.itemsSupport().sum{ item => item.puntosDeVida(self) }
+	
+	override method ataque() = super() + self.itemsSupport().sum{ item => item.puntosDeAtaque(self) }
+	
+	
+	override method equiparItem(item) {
+		itemsSupport.add(item)
+		item.efectoAlEquipar(self)
+	}
+
+	override method desequiparItem(item) {
+		itemsSupport.remove(item)
+		item.efectoAlDesequipar(self)
+	}
+
 }
 
