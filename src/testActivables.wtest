@@ -1,0 +1,35 @@
+import champion.*
+import minion.*
+import items.*
+
+describe "Test Habilidades Activables Items"{
+	var masterYi = new Champion(vidaBase = 50, ataqueBase = 15, dinero = 1500)
+	var tomo = new TomoAmplificador()
+	var sombrero = new SombreroDeRabadon()
+	var pocion = new PocionDeVida()
+	var baston = new BastonDelVacio()
+	var oleada = new OleadaDeMinions(cantMinions = 10, plus = 25)
+	var oleada2 = new OleadaDeMinions(cantMinions = 10, plus = 25)
+	var oleada3 = new OleadaDeMinions(cantMinions = 10, plus = 25)
+	
+	fixture{
+		masterYi.comprar(tomo)
+		masterYi.comprar(sombrero)
+		masterYi.comprar(pocion)
+		masterYi.comprar(baston)
+	}
+	test "Habilidad Activable TomoAmplificador"{
+		tomo.efectoAlActivar(masterYi)
+		assert.equals(masterYi.dinero(), 500)
+	}
+	test "Habilidad Activable SombreroDeRabadon"{
+		sombrero.efectoAlActivar(masterYi)
+		assert.equals(masterYi.dinero(), 500)
+	}
+	test "Habilidad Activable PocionDeVida"{
+		masterYi.atacar(oleada)
+		masterYi.atacar(oleada)
+		assert.equals(masterYi.danio(), 100)
+		//pocion.efectoAlActivar(masterYi)
+	}
+}

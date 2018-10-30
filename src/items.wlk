@@ -40,7 +40,7 @@ class TomoAmplificador inherits Items {
 	
 	override method efectoAlActivar(champion) {
 		var usos = 1
-		if (usos < 0 and champion.dinero() < 500){
+		if (usos > 0 and champion.dinero() < 500 and champion.tieneItem(self)){
 			champion.dinero(500)
 			usos -= 1
 		}
@@ -82,7 +82,7 @@ class PocionDeVida inherits Items {
 	
 	override method efectoAlActivar(champion){
 		var usos = 2
-		if(usos < 0 ){
+		if(usos > 0 and champion.tieneItem(self)){
 			champion.quitarDanio(50)
 			usos -= 1
 		}

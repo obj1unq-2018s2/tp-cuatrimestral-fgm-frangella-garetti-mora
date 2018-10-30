@@ -40,7 +40,7 @@ describe "test campeones e items etapa 2" {
 	test "compro un tomo y trato de comprar otro item sin tener plata"{
 		masterYi.comprar(tomo2)
 		masterYi.comprar(sombreroDeRabadon)
-		assert.that(!masterYi.contains(sombreroDeRabadon))
+		assert.that(!masterYi.items().contains(sombreroDeRabadon))
 	}
 
 }
