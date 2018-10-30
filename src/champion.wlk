@@ -102,7 +102,9 @@ class Support inherits Champion {
 	
 	override method ataque() = super() + self.itemsVinculo().sum{ item => item.puntosDeAtaque(self) }
 	
-	
+	method vincular(campeon){
+		vinculo = campeon
+	}
 //	override method equiparItem(item) {
 //		itemsSupport.add(item)
 //		item.efectoAlEquipar(self)
