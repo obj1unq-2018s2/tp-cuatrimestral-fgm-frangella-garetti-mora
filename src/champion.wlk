@@ -7,17 +7,18 @@ class Champion {
 	var items = []
 	var property dinero
 
-	constructor(_vida, _ataque,_dinero) {
+	constructor(_vida, _ataque, _dinero) {
 		vidaBase = _vida
 		ataqueBase = _ataque
 		dinero = _dinero
 	}
 
-
 	method estaVivo() = danio < vidaBase
-	
+
 	method items() = items
-	
+
+	method tieneItem(item) = items.contains(item)
+
 	method vida() = vidaBase + self.items().sum{ item => item.puntosDeVida(self) }
 
 	method ataque() = ataqueBase + self.items().sum{ item => item.puntosDeAtaque(self) }
@@ -35,7 +36,6 @@ class Champion {
 		alguien.recibirAtaque(ataquePropio)
 		self.ganarDinero(alguien.dineroQueEntrega())
 	}
-
 
 	method recibirAtaque(cantidad) {
 		if (bloqueos < 1 && cantidad > 0) {
@@ -67,43 +67,44 @@ class Champion {
 		}
 	}
 
-	method comprar(item){
-		if (dinero>=item.costo()){
+	method comprar(item) {
+		if (dinero >= item.costo()) {
 			self.equiparItem(item)
 			self.quitarDinero(item.costo())
 		}
 	}
-	
-	method vender(item){
+
+	method vender(item) {
 		self.desequiparItem(item)
-		self.ganarDinero(item.costo()/2)
+		self.ganarDinero(item.costo() / 2)
 	}
-	
-	method ganarDinero(cantidad){
-		dinero+=cantidad
+
+	method ganarDinero(cantidad) {
+		dinero += cantidad
 	}
-	
-	method quitarDinero(cantidad){
-		dinero-=cantidad
+
+	method quitarDinero(cantidad) {
+		dinero -= cantidad
 	}
+
 }
 
 class Support inherits Champion {
+
 	var property vinculo // campeon
-		
-	override method atacar(alguien){
+
+	override method atacar(alguien) {
 		super(alguien)
 		vinculo.quitarDanio(10)
 	}
-	
+
 	method itemsVinculo() = vinculo.items()
-	
-	method vincular(campeon){
+
+	method vincular(campeon) {
 		vinculo = campeon
 	}
-	
-	override method items() = super() + vinculo.items()
 
+	override method items() = super() + vinculo.items()
 
 }
 
