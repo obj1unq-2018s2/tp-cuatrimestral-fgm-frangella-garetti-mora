@@ -107,8 +107,7 @@ class BastonDelVacio inherits Items {
 	method quitarItem(item){
 		items.remove(item)
 	}
-	//dasd
-	//sdaasd
+	
 	override method costo() = 0
 	
 	override method efectoAlActivar(champion) = 
