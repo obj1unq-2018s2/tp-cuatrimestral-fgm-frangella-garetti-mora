@@ -89,7 +89,7 @@ class Champion {
 }
 
 class Support inherits Champion {
-	var vinculo // campeon
+	var property vinculo // campeon
 		
 	override method atacar(alguien){
 		super(alguien)
@@ -98,22 +98,12 @@ class Support inherits Champion {
 	
 	method itemsVinculo() = vinculo.items()
 	
-	override method vida() = super() + self.itemsVinculo().sum{ item => item.puntosDeVida(self) }
-	
-	override method ataque() = super() + self.itemsVinculo().sum{ item => item.puntosDeAtaque(self) }
-	
 	method vincular(campeon){
 		vinculo = campeon
 	}
-//	override method equiparItem(item) {
-//		itemsSupport.add(item)
-//		item.efectoAlEquipar(self)
-//	}
-//
-//	override method desequiparItem(item) {
-//		itemsSupport.remove(item)
-//		item.efectoAlDesequipar(self)
-//	}
+	
+	override method items() = super() + vinculo.items()
+
 
 }
 

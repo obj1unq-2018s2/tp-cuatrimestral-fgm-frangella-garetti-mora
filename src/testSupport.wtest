@@ -8,9 +8,38 @@ describe "test campeones e items etapa 2" {
 	var maokai = new Champion(vidaBase = 150, ataqueBase = 25, dinero = 1000)
 	var janna = new Support(vidaBase = 150, ataqueBase = 25, dinero = 100, vinculo = null)
 	var oleada = new OleadaDeMinions(cantMinions = 100, plus = 0)
+	var tomo = new TomoAmplificador()
+	var pocion = new PocionDeVida()
 
-	test"" {
+
+	
+	fixture{
+		janna.vincular(draven)
+		draven.atacar(oleada)
+		janna.atacar(oleada)
+		janna.vincular(maokai)
+		maokai.atacar(oleada)
+		janna.atacar(oleada)
+		maokai.comprar(tomo)
+		janna.comprar(pocion)
+		
 	}
 
+	test "la oleada esta muerta"{
+		assert.that(!oleada.estaViva())
+	}
+	
+	test "danio recibido por draven"{
+		assert.equals(draven.danio(),90)
+	}
+	
+	test "danio recibido por maokai"{
+		assert.equals(maokai.danio(),40)
+	}
+	
+	test "dinero e items de janna" {
+		assert.equals(janna.dinero(),100)
+		assert.equals(janna.items(),[pocion,tomo])
+	}
 }
 
