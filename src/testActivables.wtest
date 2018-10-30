@@ -11,25 +11,51 @@ describe "Test Habilidades Activables Items"{
 	var oleada = new OleadaDeMinions(cantMinions = 10, plus = 25)
 	var oleada2 = new OleadaDeMinions(cantMinions = 10, plus = 25)
 	var oleada3 = new OleadaDeMinions(cantMinions = 10, plus = 25)
+	var oleada4 = new OleadaDeMinions(cantMinions = 10, plus = 25)
+	var oleada5 = new OleadaDeMinions(cantMinions = 10, plus = 25)
 	
-	fixture{
+	//fixture{
+		//masterYi.comprar(tomo)
+		//masterYi.comprar(sombrero)
+		//masterYi.comprar(pocion)
+		//masterYi.comprar(baston)
+		
+	//}
+	test "Habilidad Activable TomoAmplificador"{
 		masterYi.comprar(tomo)
 		masterYi.comprar(sombrero)
-		masterYi.comprar(pocion)
-		masterYi.comprar(baston)
-	}
-	test "Habilidad Activable TomoAmplificador"{
 		tomo.efectoAlActivar(masterYi)
 		assert.equals(masterYi.dinero(), 500)
 	}
 	test "Habilidad Activable SombreroDeRabadon"{
+		masterYi.comprar(tomo)
+		masterYi.comprar(sombrero)
 		sombrero.efectoAlActivar(masterYi)
 		assert.equals(masterYi.dinero(), 500)
 	}
 	test "Habilidad Activable PocionDeVida"{
+		masterYi.comprar(pocion)
 		masterYi.atacar(oleada)
-		masterYi.atacar(oleada)
-		assert.equals(masterYi.danio(), 100)
-		//pocion.efectoAlActivar(masterYi)
+		masterYi.atacar(oleada2)
+		pocion.efectoAlActivar(masterYi)
+		assert.equals(masterYi.danio(),20)
 	}
+	test "Habilidad Activable BastonDelVacio"{
+		masterYi.comprar(tomo)
+		masterYi.comprar(sombrero)
+		masterYi.comprar(pocion)
+		masterYi.comprar(baston)
+		baston.agregarItem(tomo)
+		baston.agregarItem(sombrero)
+		baston.agregarItem(pocion)
+		masterYi.atacar(oleada)
+		masterYi.atacar(oleada2)
+		masterYi.atacar(oleada3)
+		masterYi.atacar(oleada4)
+		masterYi.atacar(oleada5)
+		baston.efectoAlActivar(masterYi)
+		assert.equals(masterYi.danio(), 0)
+		assert.equals(masterYi.dinero(), 500)
+	}
+	
 }

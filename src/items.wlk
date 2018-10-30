@@ -88,9 +88,9 @@ class PocionDeVida inherits Items {
 		}
 	}
 
-	override method puntosDeVida(champion){}
+	override method puntosDeVida(champion) = 0
 
-	override method puntosDeAtaque(champion){}
+	override method puntosDeAtaque(champion) = 0
 
 	override method efectoAlEquipar(champion){}
 
