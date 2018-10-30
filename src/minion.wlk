@@ -6,7 +6,7 @@ class OleadaDeMinions {
 	
 	method estaViva() = cantMinions > 0
 
-	method ataque() = cantMinions + plus
+	method ataque() = if (self.estaViva()) cantMinions + plus else 0
 
 	method recibirAtaque(cantidad) {
 		if (cantidad > cantMinions) {

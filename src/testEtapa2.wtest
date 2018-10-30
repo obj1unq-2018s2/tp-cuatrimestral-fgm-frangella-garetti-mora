@@ -4,7 +4,7 @@ import items.*
 
 describe "test campeones e items etapa 2" {
 
-	var masterYi = new Champion(vidaBase = 50, ataqueBase = 15, dinero = 300)
+	var masterYi = new Champion(vidaBase = 50, ataqueBase = 15, dinero = 500)
 	var doran = new AnilloDeDoran()
 	var tomo = new TomoAmplificador()
 	var tomo2 = new TomoAmplificador()
@@ -29,6 +29,18 @@ describe "test campeones e items etapa 2" {
 		masterYi.desequiparItem(tomo2)
 		assert.that(!masterYi.estaVivo())
 		
+	}
+	
+	test "compro un tomo, me quedo sin plata y se agrega el item"{
+		masterYi.comprar(tomo2)
+		assert.that(masterYi.dinero()==0)
+		assert.that(masterYi.items().contains(tomo2))
+	}
+	
+	test "compro un tomo y trato de comprar otro item sin tener plata"{
+		masterYi.comprar(tomo2)
+		masterYi.comprar(sombreroDeRabadon)
+		assert.that(!masterYi.contains(sombreroDeRabadon))
 	}
 
 }
