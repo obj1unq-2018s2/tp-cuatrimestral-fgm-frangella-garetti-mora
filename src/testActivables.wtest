@@ -14,13 +14,6 @@ describe "Test Habilidades Activables Items"{
 	var oleada4 = new OleadaDeMinions(cantMinions = 10, plus = 25)
 	var oleada5 = new OleadaDeMinions(cantMinions = 10, plus = 25)
 	
-	//fixture{
-		//masterYi.comprar(tomo)
-		//masterYi.comprar(sombrero)
-		//masterYi.comprar(pocion)
-		//masterYi.comprar(baston)
-		
-	//}
 	test "Habilidad Activable TomoAmplificador"{
 		masterYi.comprar(tomo)
 		masterYi.comprar(sombrero)
@@ -45,9 +38,9 @@ describe "Test Habilidades Activables Items"{
 		masterYi.comprar(sombrero)
 		masterYi.comprar(pocion)
 		masterYi.comprar(baston)
-		baston.agregarItem(tomo)
-		baston.agregarItem(sombrero)
-		baston.agregarItem(pocion)
+		baston.agregarMaterial(tomo)
+		baston.agregarMaterial(sombrero)
+		baston.agregarMaterial(pocion)
 		masterYi.atacar(oleada)
 		masterYi.atacar(oleada2)
 		masterYi.atacar(oleada3)

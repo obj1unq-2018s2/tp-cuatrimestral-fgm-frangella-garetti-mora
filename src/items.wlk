@@ -100,18 +100,21 @@ class PocionDeVida inherits Items {
 class BastonDelVacio inherits Items {
 	var property items = []
 	
-	method agregarItem(item){
+	method agregarMaterial(item){
 		items.add(item)
 	}
 	
-	method quitarItem(item){
+	method quitarMaterial(item){
 		items.remove(item)
 	}
 	
 	override method costo() = 0
 	
-	override method efectoAlActivar(champion) = 
-		items.forEach{ item => item.efectoAlActivar(champion) }
+	override method efectoAlActivar(champion){
+		if(champion.tieneItem(self)){
+			items.forEach{ item => item.efectoAlActivar(champion) }
+		}
+	}
 	
 	override method puntosDeVida(champion) = 
 		items.sum{ item => item.puntosDeVida(champion) / 2 }

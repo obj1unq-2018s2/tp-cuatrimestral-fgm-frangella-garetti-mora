@@ -1,6 +1,29 @@
+import champion.*
+import items.*
+import minion.*
 
-test "testX" {
-
-	assert.that(true)
-
+describe "Test Baston del Vacio"{
+	var zed = new Champion (vidaBase = 50, ataqueBase = 15, dinero = 800 )
+	var anillo1 = new AnilloDeDoran()
+	var anillo2 = new AnilloDeDoran()
+	var tomo = new TomoAmplificador()
+	var pocion = new PocionDeVida()
+	var baston = new BastonDelVacio()
+	
+	fixture{
+		zed.comprar(anillo1)
+		zed.comprar(anillo2)
+		baston.agregarMaterial(pocion)
+		baston.agregarMaterial(tomo)	
+		zed.comprar(baston)
+		
+	}
+	test "Campeon tiene 0 de danio recibido"{
+		baston.efectoAlActivar(zed)
+		assert.equals(zed.danio(), 0)
+	}
+	test "Campeon tiene 500 de dinero"{
+		baston.efectoAlActivar(zed)
+		assert.equals(zed.dinero(), 500)
+	}
 }
