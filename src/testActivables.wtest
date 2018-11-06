@@ -51,4 +51,28 @@ describe "Test Habilidades Activables Items"{
 		assert.equals(masterYi.dinero(), 500)
 	}
 	
+	test "Se usa dos veces la pocion de vida y luego no sirve mas"{
+		masterYi.comprar(pocion)
+		pocion.efectoAlActivar(masterYi)
+		pocion.efectoAlActivar(masterYi)
+		masterYi.atacar(oleada)
+		pocion.efectoAlActivar(masterYi)
+		assert.equals(masterYi.danio(),35)
+	}
+	
+	test "Se usa 2 veces el tomo amplificador"{
+		masterYi.comprar(tomo)
+		masterYi.comprar(sombrero)
+		tomo.efectoAlActivar(masterYi)
+		masterYi.comprar(pocion)
+		tomo.efectoAlActivar(masterYi)
+		assert.equals(masterYi.dinero(), 450)
+	}
+	
+	test "Se usa el tomo ya teniendo 500 de oro, no se gasta el uso" {
+		masterYi.comprar(tomo)
+		tomo.efectoAlActivar(masterYi)
+		assert.that(tomo.tieneUsoDisponible())
+	}
+	
 }

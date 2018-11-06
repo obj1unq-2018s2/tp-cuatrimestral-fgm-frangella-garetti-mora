@@ -91,8 +91,8 @@ class Champion {
 
 class Support inherits Champion {
 
-	var property vinculo // campeon
-
+	var vinculo // campeon
+	
 	override method atacar(alguien) {
 		super(alguien)
 		vinculo.quitarDanio(10)
@@ -101,7 +101,12 @@ class Support inherits Champion {
 	method itemsVinculo() = vinculo.items()
 
 	method vincular(campeon) {
+		// si trato de vincular algo que no sea una instancia de la clase champion no se puede
+		if (campeon.className().equals("champion.Champion")){ 
 		vinculo = campeon
+		} else {
+			self.error("Solo se pueden vincular campeones")
+		}
 	}
 
 	override method items() = super() + vinculo.items()

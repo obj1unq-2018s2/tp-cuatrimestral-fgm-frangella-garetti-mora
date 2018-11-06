@@ -1,6 +1,4 @@
-class Items {
-	
-	var cantUsos 
+class Item {
 	
 	method costo()
 
@@ -14,14 +12,25 @@ class Items {
 
 	method efectoAlDesequipar(champion)
 	
-	method cantUsos() = cantUsos
 	
-	method quitarUso() {cantUsos -= 1}
-	
-	method usos()
 }
 
-class AnilloDeDoran inherits Items {
+class ItemActivable inherits Item {
+	var cantUsos
+	method usosIniciales() = 0
+	method cantUsos() = cantUsos
+	method cantUsos(cantidad){
+		cantUsos = cantidad
+	}
+	method quitarUso() {
+		self.cantUsos(self.cantUsos() - 1)
+	}
+
+	method tieneUsoDisponible() = self.cantUsos() > 0
+
+}
+
+class AnilloDeDoran inherits Item {
 	
 	override method costo() = 300
 
@@ -41,20 +50,23 @@ class AnilloDeDoran inherits Items {
 
 }
 
-class TomoAmplificador inherits Items {
+class TomoAmplificador inherits ItemActivable {
 	
+	constructor () {
+		cantUsos = self.usosIniciales()
+	}
+	
+	override method usosIniciales() = 1
+
 	method dineroEfecto() = 500
-	
-	override method usos(){ cantUsos = 1 }
 	
 	override method costo() = 500
 	
 	override method efectoAlActivar(champion) {
-		if (self.cantUsos() and champion.dinero() < self.dineroEfecto()){
+		if (self.tieneUsoDisponible() and champion.dinero() < self.dineroEfecto()){
 			champion.dinero(self.dineroEfecto())
 			self.quitarUso()
-		}
-		
+		} 
 	}
 	override method puntosDeVida(champion) = champion.danio() * 0.25 // Correccion etapa 1
 
@@ -87,16 +99,21 @@ class SombreroDeRabadon inherits TomoAmplificador {
 	override method efectoAlDesequipar(champion) {}
 }
 
-class PocionDeVida inherits Items {
-	override method usos(){ cantUsos = 2 }
+class PocionDeVida inherits ItemActivable {
+	
+	constructor() {
+		cantUsos = self.usosIniciales()
+	}
+	
+	override method usosIniciales() = 2
 	
 	override method costo() = 50
 	
 	override method efectoAlActivar(champion){
-		if(self.cantUsos()){
+		if(self.tieneUsoDisponible()){
 			champion.quitarDanio(50)
 			self.quitarUso()
-		}
+		} 
 	}
 
 	override method puntosDeVida(champion) = 0
@@ -108,7 +125,7 @@ class PocionDeVida inherits Items {
 	override method efectoAlDesequipar(champion){}
 
 }
-class BastonDelVacio inherits Items {
+class BastonDelVacio inherits ItemActivable {
 	var property items = []
 	
 	method agregarMaterial(item){
@@ -121,8 +138,8 @@ class BastonDelVacio inherits Items {
 	
 	override method costo() = 0
 	
-	override method efectoAlActivar(champion){
-			items.forEach{ item => item.efectoAlActivar(champion) }
+	override method efectoAlActivar(champion) {
+		items.forEach{ item => item.efectoAlActivar(champion)}
 	}
 	
 	override method puntosDeVida(champion) = 
