@@ -7,12 +7,6 @@ class Champion {
 	var items = []
 	var property dinero
 
-	constructor(_vida, _ataque, _dinero) {
-		vidaBase = _vida
-		ataqueBase = _ataque
-		dinero = _dinero
-	}
-
 	method estaVivo() = danio < vidaBase
 
 	method items() = items
@@ -102,7 +96,7 @@ class Support inherits Champion {
 
 	method vincular(campeon) {
 		// si trato de vincular algo que no sea una instancia de la clase champion no se puede
-		if (campeon.className().equals("champion.Champion")){ 
+		if (campeon.kindName().equals("a Champion")){ 
 		vinculo = campeon
 		} else {
 			self.error("Solo se pueden vincular campeones")

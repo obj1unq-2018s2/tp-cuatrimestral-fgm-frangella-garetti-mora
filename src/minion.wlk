@@ -1,15 +1,15 @@
 class OleadaDeMinions {
 
 	var property cantMinions
-	var plus
 	var property dineroQueEntrega = cantMinions
-	
+	var plus
+
 	method estaViva() = cantMinions > 0
 
 	method ataque() = if (self.estaViva()) cantMinions + plus else 0
 
 	method recibirAtaque(cantidad) {
-		if (cantidad > cantMinions) {
+		if (self.muereLaOleada(cantidad)) {
 			dineroQueEntrega = cantMinions
 			cantMinions = 0
 		} else {
@@ -17,6 +17,8 @@ class OleadaDeMinions {
 			dineroQueEntrega = cantidad
 		}
 	}
+
+	method muereLaOleada(cantidad) = cantidad > cantMinions
 
 }
 
