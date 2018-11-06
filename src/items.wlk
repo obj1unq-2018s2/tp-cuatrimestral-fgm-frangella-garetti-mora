@@ -1,5 +1,7 @@
 class Items {
 	
+	var cantUsos 
+	
 	method costo()
 
 	method efectoAlActivar(champion)
@@ -11,7 +13,12 @@ class Items {
 	method efectoAlEquipar(champion)
 
 	method efectoAlDesequipar(champion)
-
+	
+	method cantUsos() = cantUsos
+	
+	method quitarUso() {cantUsos -= 1}
+	
+	method usos()
 }
 
 class AnilloDeDoran inherits Items {
@@ -36,14 +43,18 @@ class AnilloDeDoran inherits Items {
 
 class TomoAmplificador inherits Items {
 	
+	method dineroEfecto() = 500
+	
+	override method usos(){ cantUsos = 1 }
+	
 	override method costo() = 500
 	
 	override method efectoAlActivar(champion) {
-		var usos = 1
-		if (usos > 0 and champion.dinero() < 500){
-			champion.dinero(500)
-			usos -= 1
+		if (self.cantUsos() and champion.dinero() < self.dineroEfecto()){
+			champion.dinero(self.dineroEfecto())
+			self.quitarUso()
 		}
+		
 	}
 	override method puntosDeVida(champion) = champion.danio() * 0.25 // Correccion etapa 1
 
@@ -77,14 +88,14 @@ class SombreroDeRabadon inherits TomoAmplificador {
 }
 
 class PocionDeVida inherits Items {
+	override method usos(){ cantUsos = 2 }
 	
 	override method costo() = 50
 	
 	override method efectoAlActivar(champion){
-		var usos = 2
-		if(usos > 0){
+		if(self.cantUsos()){
 			champion.quitarDanio(50)
-			usos -= 1
+			self.quitarUso()
 		}
 	}
 
