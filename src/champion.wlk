@@ -107,7 +107,7 @@ class Support inherits Champion {
 	method itemsVinculo() = vinculo.items()
 
 	method vincular(campeon) {
-		// la idea era chequear si puede lo que estoy tratando de vincular es un champion, sino que tire error
+		// la idea era chequear si lo que estoy tratando de vincular es un champion, sino que tire error
 		// if (campeon.kindName().equals("a Champion")){ 
 		vinculo = campeon
 	// } else {
