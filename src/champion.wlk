@@ -7,7 +7,7 @@ class Champion {
 	var items = []
 	var property dinero
 
-	method estaVivo() = danio < vidaBase
+	method estaVivo() = danio < self.vida()
 
 	method items() = items
 
