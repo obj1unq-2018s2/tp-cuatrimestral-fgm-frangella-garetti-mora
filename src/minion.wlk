@@ -18,6 +18,6 @@ class OleadaDeMinions {
 		}
 	}
 
-	method muereLaOleada(cantidad) = cantidad > cantMinions
+	method muereLaOleada(cantidad) = cantidad >= cantMinions
 }
 
