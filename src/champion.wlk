@@ -36,17 +36,16 @@ class Champion {
 	}
 
 	method recibirDanioOBloquear(cantidad) {
-		if (self.puedeRecibirNDanio(cantidad)) {
+		if (!self.puedeBloquear(cantidad)) {
 			self.recibirDanio(cantidad)
-		} else if (self.puedeBloquear(cantidad)) {
+		} else {
 			bloqueos -= 1
 		}
 	}
 
-	method puedeRecibirNDanio(cantidad) = bloqueos < 1 && cantidad > 0
-
-	method puedeBloquear(cantidad) = bloqueos >= 1 && cantidad > 0
-
+	// chequeamos que la cantidad sea mayor a 0 para no gastar un bloqueo por un ataque de 0 danio
+	method puedeBloquear(cantidad) = bloqueos >= 1 && cantidad > 0 
+	
 	method equiparItem(item) {
 		items.add(item)
 		item.efectoAlEquipar(self)
