@@ -32,12 +32,16 @@ class Champion {
 	}
 
 	method recibirAtaque(cantidad) {
-		if (bloqueos < 1 && cantidad > 0) {
+		if (self.puedeRecibirNDanio(cantidad)) {
 			self.recibirDanio(cantidad)
-		} else if (bloqueos >= 1 && cantidad > 0) {
+		} else if (self.puedeBloquear(cantidad)) {
 			bloqueos -= 1
 		}
 	}
+
+	method puedeRecibirNDanio(cantidad) = bloqueos < 1 && cantidad > 0
+
+	method puedeBloquear(cantidad) = bloqueos >= 1 && cantidad > 0
 
 	method equiparItem(item) {
 		items.add(item)
@@ -62,11 +66,13 @@ class Champion {
 	}
 
 	method comprar(item) {
-		if (dinero >= item.costo()) {
+		if (self.tieneDineroSuficientePara(item)) {
 			self.equiparItem(item)
 			self.quitarDinero(item.costo())
 		}
 	}
+
+	method tieneDineroSuficientePara(item) = dinero >= item.costo()
 
 	method vender(item) {
 		self.desequiparItem(item)
@@ -86,7 +92,7 @@ class Champion {
 class Support inherits Champion {
 
 	var vinculo // campeon
-	
+
 	override method atacar(alguien) {
 		super(alguien)
 		vinculo.quitarDanio(10)
@@ -95,12 +101,12 @@ class Support inherits Champion {
 	method itemsVinculo() = vinculo.items()
 
 	method vincular(campeon) {
-		// si trato de vincular algo que no sea una instancia de la clase champion no se puede
-		if (campeon.kindName().equals("a Champion")){ 
+		// la idea era chequear si puede lo que estoy tratando de vincular es un champion, sino que tire error
+		// if (campeon.kindName().equals("a Champion")){ 
 		vinculo = campeon
-		} else {
-			self.error("Solo se pueden vincular campeones")
-		}
+	// } else {
+	// self.error("Solo se pueden vincular campeones")
+	// } Dejo todo esto comentado hasta saber si esta bien o es hacer de mas al pedo
 	}
 
 	override method items() = super() + vinculo.items()
