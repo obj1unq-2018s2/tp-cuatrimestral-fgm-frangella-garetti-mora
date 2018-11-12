@@ -25,13 +25,17 @@ class Champion {
 
 	method atacar(alguien) {
 		var ataqueEnemigo = alguien.ataque() // variables locales para que el danio no se modifique por quien pega primero
-		var ataquePropio = self.ataque()
+		var ataquePropio = self.ataque() // recordamos el valor de ataque de ambos antes de recibir danio y se modifique
 		self.recibirAtaque(ataqueEnemigo)
 		alguien.recibirAtaque(ataquePropio)
 		self.ganarDinero(alguien.dineroQueEntrega())
 	}
 
 	method recibirAtaque(cantidad) {
+		self.recibirDanioOBloquear(cantidad)
+	}
+
+	method recibirDanioOBloquear(cantidad) {
 		if (self.puedeRecibirNDanio(cantidad)) {
 			self.recibirDanio(cantidad)
 		} else if (self.puedeBloquear(cantidad)) {
@@ -76,7 +80,7 @@ class Champion {
 
 	method vender(item) {
 		self.desequiparItem(item)
-		self.ganarDinero(item.costo() / 2)
+		self.ganarDinero(self.valorDeVenta(item))
 	}
 
 	method ganarDinero(cantidad) {
@@ -86,6 +90,8 @@ class Champion {
 	method quitarDinero(cantidad) {
 		dinero -= cantidad
 	}
+
+	method valorDeVenta(item) = item.costo() / 2
 
 }
 
