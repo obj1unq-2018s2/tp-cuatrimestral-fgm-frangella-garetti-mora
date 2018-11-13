@@ -89,6 +89,12 @@ class Champion {
 	}
 
 	method valorDeVenta(item) = item.costo() / 2
+	
+	method activarItem(item){
+		if (self.tieneItem(item)){
+			item.habilidadActivable(self)
+		}
+	}
 
 }
 

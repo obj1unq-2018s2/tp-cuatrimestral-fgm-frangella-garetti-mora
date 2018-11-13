@@ -28,7 +28,7 @@ class ItemActivable inherits Item {
 
 	method tieneUsoDisponible() = self.cantUsos() < self.limiteDeUsos()
 
-	method puedeActivar(champion) = self.tieneUsoDisponible()
+	method puedeActivar(champion) = self.tieneUsoDisponible() 
 
 }
 
