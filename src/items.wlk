@@ -64,7 +64,6 @@ class TomoAmplificador inherits ItemActivable {
 	override method costo() = 500
 
 	override method efectoAlActivar(champion) {
-		// if (self.tieneUsoDisponible() and champion.dinero() < self.dineroEfecto()){
 		if (self.puedeActivar(champion)) {
 			champion.dinero(self.dineroEfecto())
 			self.gastarUso()

@@ -25,7 +25,6 @@ class Champion {
 
 	method atacar(alguien) {
 		var ataqueEnemigo = alguien.ataque() // variable local para que el danio no se modifique por quien pega primero
-		//var ataquePropio = self.ataque() esto estaba al pedo, el danio del champion no se modifica
 		self.recibirAtaque(ataqueEnemigo)
 		alguien.recibirAtaque(self.ataque())
 		self.ganarDinero(alguien.dineroQueEntrega())
