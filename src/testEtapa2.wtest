@@ -5,6 +5,7 @@ import items.*
 describe "test campeones e items etapa 2" {
 
 	var masterYi = new Champion(vidaBase = 50, ataqueBase = 15, dinero = 500)
+	var zed = new Champion (vidaBase = 200, ataqueBase = 15, dinero = 500)
 	var doran = new AnilloDeDoran()
 	var tomo = new TomoAmplificador()
 	var tomo2 = new TomoAmplificador()
@@ -12,7 +13,7 @@ describe "test campeones e items etapa 2" {
 	var oleada = new OleadaDeMinions(cantMinions = 10, plus = 25)
 	var oleada2 = new OleadaDeMinions(cantMinions = 10, plus = 25)
 	var oleada3 = new OleadaDeMinions(cantMinions = 10, plus = 25)
-
+	var oleada4 = new OleadaDeMinions(cantMinions = 100, plus = 0)
 	fixture {
 		masterYi.equiparItem(doran)
 		masterYi.equiparItem(tomo)
@@ -46,6 +47,16 @@ describe "test campeones e items etapa 2" {
 	test "yi vende el doran"{
 		masterYi.vender(doran)
 		assert.equals(masterYi.dinero(),650)
+	}
+	
+	test "yi gano 10 de oro por haber matado a la oleada"{
+		masterYi.atacar(oleada)
+		assert.equals(masterYi.dinero(),510)
+	}
+	
+	test "zed mata ataca una oleada de 100 minions y gana solo por los que mato"{
+		zed.atacar(oleada4)
+		assert.equals(zed.dinero(),515)
 	}
 
 }

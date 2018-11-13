@@ -3,7 +3,7 @@ class OleadaDeMinions {
 	var property cantMinions
 	var property dineroQueEntrega = cantMinions
 	var plus
-
+	
 	method estaViva() = cantMinions > 0
 
 	method ataque() = if (self.estaViva()) cantMinions + plus else 0
