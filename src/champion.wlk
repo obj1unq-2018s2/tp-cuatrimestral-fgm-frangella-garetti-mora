@@ -114,7 +114,7 @@ class Support inherits Champion {
 	// } Dejo todo esto comentado hasta saber si esta bien o es hacer de mas al pedo
 	}
 
-	override method items() = super() + vinculo.items()
+	override method items() = super() + self.itemsVinculo()
 
 }
 
