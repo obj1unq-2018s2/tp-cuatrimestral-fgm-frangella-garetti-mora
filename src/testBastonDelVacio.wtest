@@ -18,12 +18,20 @@ describe "Test Baston del Vacio"{
 		zed.comprar(baston)
 		
 	}
+	
 	test "Campeon tiene 0 de danio recibido"{
 		baston.efectoAlActivar(zed)
 		assert.equals(zed.danio(), 0)
 	}
+	
 	test "Campeon tiene 500 de dinero"{
 		baston.efectoAlActivar(zed)
 		assert.equals(zed.dinero(), 500)
+	}
+	
+	test "Pocion de Vida no tiene usos disponibles"{
+		baston.efectoAlActivar(zed)
+		baston.efectoAlActivar(zed)
+		assert.notThat(pocion.tieneUsoDisponible())
 	}
 }
